@@ -1,0 +1,34 @@
+Room design
+
+Room types:
+
+1. Common mobs
+	reward: 1 random card
+2. Elite mobs
+	reward: few(3?) cards
+3. Boss
+	reward: pack(10-20) cards
+
+Room ideas:
+
+Common:
+	"Imps":
+		There are 4 casting mobs around the room with relatively long cast time
+		and low health. They start casting a high hitting instant damage spell on room activation.
+		Additionaly there are 2 melee mobs with high health going after the player.
+		The player has to kite the mobs and attack the casters to survive.
+		Focusing on melees b4 casters most likely results in death.
+		Terrain: one pillar in the center.
+	"Wild dogs":
+		Very easy starting room, just few fast melee mobs with low health dealing low damage.
+		Terrain: few rocks, open space
+		
+	
+
+Overall gameplay
+
+-first 9 rooms are always common mobs
+-10th room is deckbuilding room
+-after 10th room there is a chance of getting elite room(there are 8-12 elite rooms for each 50 rooms(b4 each boss))
+-boss room spawns every ~50 rooms(probably rng between 40-60)
+-every 10-12 rooms there is a deckbuilding room

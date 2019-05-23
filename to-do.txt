@@ -1,0 +1,14 @@
+TO-DO:
+1. "Room1:Wild Dogs" prefab
+	1.1 Instantiating an enemy(with nameplate)
+	1.2 Design "enemy1:Wild Dog"
+	1.3 Program "enemy1:Wild Dog"
+	1.4 Make different door number than 4(3, 2, 1) and test it
+2. Make temporary starting room and room1 graphics
+	2.1 Allign graphics with collisions and doors
+3. Make Deckbuilding Room
+4. Add mechanics to room system
+	4.1 room clearing(clear the room --> get the card)
+	4.2 room activation(enter the room --> activate mobs, traps etc.)
+5. Make Card Looting system, animation
+6. Design good and simple all-rounder starter deck(for mage)
