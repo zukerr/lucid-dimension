@@ -12,3 +12,4 @@ TO-DO:
 	4.2 room activation(enter the room --> activate mobs, traps etc.)
 5. Make Card Looting system, animation
 6. Design good and simple all-rounder starter deck(for mage)
+7. Move deck and SetupDeck abstract method from Alive to Player, fix all dependencies
