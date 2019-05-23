@@ -79,6 +79,7 @@ public class PlayerTabtarget : MonoBehaviour {
 					if (player.GetComponent<Alive> ().target != t.GetComponent<Alive> ()) 
 					{
 						player.GetComponent<Alive> ().SetTarget (t.GetComponent<Alive> ());
+                        nearbyEnemies.Shuffle();
 						break;
 					}
 				}

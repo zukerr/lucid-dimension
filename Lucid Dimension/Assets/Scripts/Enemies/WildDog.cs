@@ -52,7 +52,7 @@ public class WildDog : MonoBehaviour
         else if(!dashing)
         {
             //Start casting dash
-            Debug.Log("Dashing! " + movementVector);
+            //Debug.Log("Dashing! " + movementVector);
             StartCoroutine(Dash(movementVector));
         }
     }
@@ -61,14 +61,14 @@ public class WildDog : MonoBehaviour
     {
         dashing = true;
         float time = 0;
-        Debug.Log("Starting casting dash");
+        //Debug.Log("Starting casting dash");
         while(time < dashCastTime)
         {
             yield return null;
             castBar.fillAmount = time / dashCastTime;
             time += Time.deltaTime;
         }
-        Debug.Log("Finished casting dash");
+        //Debug.Log("Finished casting dash");
         castBar.fillAmount = 0f;
         //setup
         playerDirection.Normalize();
@@ -76,7 +76,7 @@ public class WildDog : MonoBehaviour
         //algorithm
         float distanceMade = 0f;
         Vector2 startingPosition = transform.position;
-        Debug.Log("Starting dash loop");
+        //Debug.Log("Starting dash loop");
         while(distanceMade < dashLength)
         {
             
@@ -84,7 +84,7 @@ public class WildDog : MonoBehaviour
             distanceMade = Vector2.Distance(transform.position, startingPosition);
             yield return null;
         }
-        Debug.Log("Finished dash loop");
+        //Debug.Log("Finished dash loop");
         dashing = false;
     }
 }
