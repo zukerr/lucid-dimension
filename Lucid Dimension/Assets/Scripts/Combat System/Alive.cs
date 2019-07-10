@@ -17,7 +17,7 @@ public abstract class Alive : MonoBehaviour
     public AliveBuffManagement BuffManagement { get; set; }
     public AliveRegeneration Regeneration { get; set; }
 
-    public abstract void SetupDeck ();
+    public virtual void SetupDeck() { }
 
 	public virtual void SetTarget(Alive newTarget)
 	{
@@ -43,6 +43,10 @@ public abstract class Alive : MonoBehaviour
                 FileRef.playerRef.targetFrame.ClearOwner();
             }
             Destroy(gameObject);
+            if(this != FileRef.playerRef)
+            {
+                RoomGenerator.me.EnemyDied();
+            }
 		}
 	}
 

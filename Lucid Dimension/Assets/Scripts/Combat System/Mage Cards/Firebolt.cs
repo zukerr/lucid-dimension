@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ public class Firebolt : Card
 	public Firebolt(Deck parentDeck) : base(parentDeck)
 	{
 		this.cardName = "Firebolt";
-		this.castTime = 6f;
+		this.castTime = 1.2f;
 		this.resourceCost = 3f;
 	}
 

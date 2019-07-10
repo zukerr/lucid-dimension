@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +8,7 @@ public class TestOpponent : Alive {
 	public override void Start () 
 	{
 		base.Start ();
+        Setup();
 	}
 	
 	// Update is called once per frame
@@ -15,17 +16,15 @@ public class TestOpponent : Alive {
 		
 	}
 
-	public override void SetupDeck ()
-	{
-		deck.AddMultipleToLibrary (new Fireball (deck), 5);
-		deck.AddMultipleToLibrary (new Bolide (deck), 5);
-		deck.AddMultipleToLibrary (new Combustion (deck), 5);
-		deck.AddMultipleToLibrary (new WallOfFire (deck), 5);
-		deck.AddMultipleToLibrary (new Desintegration (deck), 5);
-		deck.AddMultipleToLibrary (new Detonate (deck), 5);
-		deck.AddMultipleToLibrary (new Flamestrike (deck), 5);
-		deck.AddMultipleToLibrary (new Firebolt (deck), 5);
-		deck.AddMultipleToLibrary (new Eruption (deck), 5);
-		deck.AddMultipleToLibrary (new Ignite (deck), 5);
-	}
+    private void Setup()
+    {
+        namePlate.gameObject.GetComponent<Canvas>().worldCamera = FileRef.cameraRef;
+        namePlate.selectButton.onClick.AddListener(TaskOnClick);
+    }
+
+    void TaskOnClick()
+    {
+        FileRef.playerRef.SetTarget(this);
+    }
+
 }

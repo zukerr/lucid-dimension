@@ -27,8 +27,32 @@ public class Room : MonoBehaviour
     private GameObject topRoom = null;
     private GameObject bottomRoom = null;
 
+    public Door rightDoor;
+    public Door leftDoor;
+    public Door topDoor;
+    public Door bottomDoor;
+
     private int xRoomIndex;
     private int yRoomIndex;
+
+    public RoomManagement Management { get; set; }
+
+    public bool Right
+    {
+        get { return right; }
+    }
+    public bool Left
+    {
+        get { return left; }
+    }
+    public bool Top
+    {
+        get { return top; }
+    }
+    public bool Bottom
+    {
+        get { return bottom; }
+    }
 
     public int XRoomIndex
     {
@@ -49,7 +73,8 @@ public class Room : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-
+        Management = gameObject.GetComponent<RoomManagement>();
+        Management.ParentRoom = this;
 	}
 	
 	// Update is called once per frame

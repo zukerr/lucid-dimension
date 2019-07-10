@@ -8,12 +8,24 @@ public class Door : MonoBehaviour
     [SerializeField]
     private Direction direction;
 
+    private Room myRoom;
+
     private const float distanceFromWall = 1f;
+
+    private Vector2 normalColliderOffset;
+    private Vector2 normalColliderSize;
+
+    private Vector2 lockedColliderOffset;
+    private Vector2 lockedColliderSize;
+
+    private BoxCollider2D myCollider;
 
 	// Use this for initialization
 	void Start ()
     {
-		
+        myRoom = gameObject.transform.parent.GetComponent<Room>();
+        myCollider = GetComponent<BoxCollider2D>();
+        Setup();
 	}
 	
 	// Update is called once per frame
@@ -30,6 +42,8 @@ public class Door : MonoBehaviour
             FileRef.playerRef.gameObject.transform.position = GetSpawnPosition();
             RoomController.rc.focusCamera(transform.parent.GetComponent<Room>().GetAdjacentRoom(direction).gameObject);
             transform.parent.GetComponent<Room>().GetAdjacentRoom(direction).GenerateAdjacent();
+            //RoomGenerator.me.activeRoom = transform.parent.GetComponent<Room>().GetAdjacentRoom(direction);
+            RoomGenerator.me.SetActiveRoom(transform.parent.GetComponent<Room>().GetAdjacentRoom(direction));
         }
     }
 
@@ -54,4 +68,80 @@ public class Door : MonoBehaviour
         return result;
     }
 
+    private void Setup()
+    {
+        bool temp = true;
+        SetupLockedColliders();
+        switch (direction)
+        {
+            case Direction.right:
+                temp = myRoom.Right;
+                break;
+            case Direction.left:
+                temp = myRoom.Left;
+                break;
+            case Direction.top:
+                temp = myRoom.Top;
+                break;
+            case Direction.bottom:
+                temp = myRoom.Bottom;
+                break;
+        }
+        if(!temp)
+        {
+            myCollider.isTrigger = false;
+            myCollider.offset = lockedColliderOffset;
+            myCollider.size = lockedColliderSize;
+            Destroy(GetComponent<SpriteRenderer>());
+            Destroy(this);
+        }
+    }
+
+    private void SetupLockedColliders()
+    {
+        normalColliderOffset = myCollider.offset;
+        normalColliderSize = myCollider.size;
+
+        switch (direction)
+        {
+            case Direction.right:
+                lockedColliderOffset = new Vector2(-0.005f, 0f);
+                lockedColliderSize = new Vector2(0.02069518f, 0.1f);
+                break;
+            case Direction.left:
+                lockedColliderOffset = new Vector2(0.005f, 0f);
+                lockedColliderSize = new Vector2(0.02069518f, 0.1f);
+                break;
+            case Direction.top:
+                lockedColliderOffset = new Vector2(0f, -0.005f);
+                lockedColliderSize = new Vector2(0.1f, 0.02069518f);
+                break;
+            case Direction.bottom:
+                lockedColliderOffset = new Vector2(0f, 0.005f);
+                lockedColliderSize = new Vector2(0.1f, 0.02069518f);
+                break;
+        }
+    }
+
+    public void Close()
+    {
+        myCollider = GetComponent<BoxCollider2D>();
+        myCollider.isTrigger = false;
+        myCollider.offset = lockedColliderOffset;
+        myCollider.size = lockedColliderSize;
+        GetComponent<SpriteRenderer>().enabled = false;
+
+        //Display locked door graphic
+    }
+
+    public void Open()
+    {
+        myCollider = GetComponent<BoxCollider2D>();
+        myCollider.isTrigger = true;
+        myCollider.offset = normalColliderOffset;
+        myCollider.size = normalColliderSize;
+        GetComponent<SpriteRenderer>().enabled = true;
+
+        //stop displaying locked door graphic
+    }
 }

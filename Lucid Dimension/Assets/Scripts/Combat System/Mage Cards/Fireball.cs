@@ -1,15 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Fireball : Card 
 {
-	private float damage = 10f;
+	private float damage = 25f;
 
 	public Fireball(Deck parentDeck) : base(parentDeck)
 	{
 		this.cardName = "Fireball";
-		this.castTime = 2f;
+		this.castTime = 0.4f;
 		this.resourceCost = 12f;
 	}
 

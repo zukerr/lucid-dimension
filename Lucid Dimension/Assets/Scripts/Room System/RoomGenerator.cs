@@ -14,6 +14,10 @@ public class RoomGenerator : MonoBehaviour {
 
     private Room[,] roomTab;
 
+    public int currentEnemiesCount;
+
+    public Room activeRoom;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -22,7 +26,33 @@ public class RoomGenerator : MonoBehaviour {
         roomTab[500, 500] = startingRoom;
         startingRoom.SetRoomIndex(500, 500);
         startingRoom.GenerateAdjacent();
+        StartCoroutine(GameStart());
+        activeRoom = startingRoom;
 	}
+
+    public void EnemyDied()
+    {
+        currentEnemiesCount--;
+        if(currentEnemiesCount == 0)
+        {
+            activeRoom.Management.OpenDoors();
+        }
+    }
+
+    public void SetActiveRoom(Room room)
+    {
+        activeRoom = room;
+        activeRoom.Management.ActivateRoom();
+    }
+
+    private IEnumerator GameStart()
+    {
+        while(startingRoom.Management == null)
+        {
+            yield return null;
+        }
+        startingRoom.Management.ActivateRoom();
+    }
 	
 	// Update is called once per frame
 	void Update ()

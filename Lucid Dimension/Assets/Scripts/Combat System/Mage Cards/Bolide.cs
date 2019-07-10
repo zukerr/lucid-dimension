@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ public class Bolide : Card
 	public Bolide(Deck parentDeck) : base(parentDeck)
 	{
 		this.cardName = "Bolide";
-		this.castTime = 5f;
+		this.castTime = 1f;
 		this.resourceCost = 20f;
 	}
 
