@@ -42,10 +42,10 @@ public abstract class Alive : MonoBehaviour
             {
                 FileRef.playerRef.targetFrame.ClearOwner();
             }
-            Destroy(gameObject);
             if(this != FileRef.playerRef)
             {
                 RoomGenerator.me.EnemyDied();
+                Destroy(gameObject);
             }
 		}
 	}

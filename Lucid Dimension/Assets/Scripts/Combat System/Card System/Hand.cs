@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -129,7 +129,7 @@ public class Hand : MonoBehaviour
 
 	protected void SafeUseCard_1(int index)
 	{
-		if (hand [index].CheckConditions ()) 
+		if (hand [index].CheckConditionsBeforeCasting ()) 
 		{
 			StartCoroutine (UseCard_1 (index));
 		}

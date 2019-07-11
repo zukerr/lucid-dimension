@@ -114,12 +114,12 @@ public abstract class Card
 		parentDeck.Owner.CooldownManagement.TriggerGcdOnDeck ();
 		float time = 0;
 		float speed = 1f;
-		while ((time < castTime) && (CheckCastingWhileMovingCondition()))
+		while ((time < castTime) && (CheckConditionsWhileCasting(tempCardTarget)))
 		{
 			yield return null;
 			time += speed * Time.deltaTime;
 			img.fillAmount = (time / castTime);
-			if (!CheckCastingWhileMovingCondition ()) 
+			if (!CheckConditionsWhileCasting (tempCardTarget)) 
 			{
 				castingInterrupted = true;
 			}
@@ -150,15 +150,20 @@ public abstract class Card
 		}
 	}
 
-	public virtual bool CheckConditions()
+	public virtual bool CheckConditionsBeforeCasting()
 	{
 		if (parentDeck.Owner.target != null) 
 		{
-			return CheckCastingWhileMovingCondition ();
+			return CheckCastingWhileMovingCondition () && CheckTargetInRangeCondition (parentDeck.Owner.target);
 		}
 		else
 			return false;
 	}
+
+    private bool CheckConditionsWhileCasting(Alive target)
+    {
+        return CheckCastingWhileMovingCondition() && CheckTargetInRangeCondition(target);
+    }
 
 	private bool CheckCastingWhileMovingCondition()
 	{
@@ -178,4 +183,17 @@ public abstract class Card
 			return true;
 		}
 	}
+
+    private bool CheckTargetInRangeCondition(Alive target)
+    {
+        if(((Opponent)target).InRange)
+        {
+            return true;
+        }
+        else
+        {
+            Debug.LogWarning("Target is not in range!");
+            return false;
+        }
+    }
 }

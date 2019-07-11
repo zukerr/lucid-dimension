@@ -40,18 +40,22 @@ public class Room : MonoBehaviour
     public bool Right
     {
         get { return right; }
+        set { right = value; }
     }
     public bool Left
     {
         get { return left; }
+        set { left = value; }
     }
     public bool Top
     {
         get { return top; }
+        set { top = value; }
     }
     public bool Bottom
     {
         get { return bottom; }
+        set { bottom = value; }
     }
 
     public int XRoomIndex
@@ -75,6 +79,10 @@ public class Room : MonoBehaviour
     {
         Management = gameObject.GetComponent<RoomManagement>();
         Management.ParentRoom = this;
+        if(!RoomGenerator.me.startingRoomCreated)
+        {
+            RoomGenerator.me.startingRoomCreated = true;
+        }
 	}
 	
 	// Update is called once per frame
@@ -111,25 +119,44 @@ public class Room : MonoBehaviour
             rightRoom = Instantiate(RoomGenerator.me.GetRoomPrefab(), GetSpawnPosition(Direction.right), transform.rotation, transform.parent);
             rightRoom.GetComponent<Room>().leftRoom = gameObject;
             RoomGenerator.me.AddNewRoom(xRoomIndex + 1, yRoomIndex, rightRoom.GetComponent<Room>());
+            RandomizeDoorsGeneration(rightRoom);
+            rightRoom.GetComponent<Room>().left = true;
+            rightRoom.GetComponent<Room>().Management.SetupDoors();
         }
         if ((left) && (leftRoom == null) && (RoomGenerator.me.TargetRoomAvailible(xRoomIndex - 1, yRoomIndex)))
         {
             leftRoom = Instantiate(RoomGenerator.me.GetRoomPrefab(), GetSpawnPosition(Direction.left), transform.rotation, transform.parent);
             leftRoom.GetComponent<Room>().rightRoom = gameObject;
             RoomGenerator.me.AddNewRoom(xRoomIndex - 1, yRoomIndex, leftRoom.GetComponent<Room>());
+            RandomizeDoorsGeneration(leftRoom);
+            leftRoom.GetComponent<Room>().right = true;
+            leftRoom.GetComponent<Room>().Management.SetupDoors();
         }
         if ((top) && (topRoom == null) && (RoomGenerator.me.TargetRoomAvailible(xRoomIndex, yRoomIndex + 1)))
         {
             topRoom = Instantiate(RoomGenerator.me.GetRoomPrefab(), GetSpawnPosition(Direction.top), transform.rotation, transform.parent);
             topRoom.GetComponent<Room>().bottomRoom = gameObject;
             RoomGenerator.me.AddNewRoom(xRoomIndex, yRoomIndex + 1, topRoom.GetComponent<Room>());
+            RandomizeDoorsGeneration(topRoom);
+            topRoom.GetComponent<Room>().bottom = true;
+            topRoom.GetComponent<Room>().Management.SetupDoors();
         }
         if ((bottom) && (bottomRoom == null) && (RoomGenerator.me.TargetRoomAvailible(xRoomIndex, yRoomIndex - 1)))
         {
             bottomRoom = Instantiate(RoomGenerator.me.GetRoomPrefab(), GetSpawnPosition(Direction.bottom), transform.rotation, transform.parent);
             bottomRoom.GetComponent<Room>().topRoom = gameObject;
             RoomGenerator.me.AddNewRoom(xRoomIndex, yRoomIndex - 1, bottomRoom.GetComponent<Room>());
+            RandomizeDoorsGeneration(bottomRoom);
+            bottomRoom.GetComponent<Room>().top = true;
+            bottomRoom.GetComponent<Room>().Management.SetupDoors();
         }
+    }
+
+    private void RandomizeDoorsGeneration(GameObject room)
+    {
+        room.GetComponent<Room>().Management = room.GetComponent<RoomManagement>();
+        room.GetComponent<Room>().Management.ParentRoom = room.GetComponent<Room>();
+        room.GetComponent<Room>().Management.RandomizeDoors();
     }
 
     public Room GetAdjacentRoom(Direction dir)

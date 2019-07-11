@@ -18,6 +18,8 @@ public class WildDog : MonoBehaviour
     private float dashCastTime = 1f;
     [SerializeField]
     private float dashingSpeed = 10f;
+    [SerializeField]
+    private float damage = 10f;
     
     private bool dashing = false;
 
@@ -27,6 +29,7 @@ public class WildDog : MonoBehaviour
 	void Start ()
     {
         rbody = GetComponent<Rigidbody2D>();
+        dashLength = Random.Range(dashLength - 0.5f, dashLength + 0.5f);
 	}
 	
 	// Update is called once per frame
@@ -86,5 +89,14 @@ public class WildDog : MonoBehaviour
         }
         //Debug.Log("Finished dash loop");
         dashing = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.gameObject.GetComponent<Player>() != null)
+        {
+            Player p = col.gameObject.GetComponent<Player>();
+            p.GetDamage(damage);
+        }
     }
 }

@@ -17,6 +17,7 @@ public class RoomGenerator : MonoBehaviour {
     public int currentEnemiesCount;
 
     public Room activeRoom;
+    public bool startingRoomCreated = false;
 
 	// Use this for initialization
 	void Start ()
@@ -36,6 +37,7 @@ public class RoomGenerator : MonoBehaviour {
         if(currentEnemiesCount == 0)
         {
             activeRoom.Management.OpenDoors();
+            //Room Complete - player gets a reward
         }
     }
 
@@ -51,6 +53,7 @@ public class RoomGenerator : MonoBehaviour {
         {
             yield return null;
         }
+        startingRoom.Management.SetupDoors();
         startingRoom.Management.ActivateRoom();
     }
 	

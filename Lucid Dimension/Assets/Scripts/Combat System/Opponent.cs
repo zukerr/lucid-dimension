@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestOpponent : Alive {
+public class Opponent : Alive
+{
+
+    private bool inRange = false;
+    public bool InRange { get; set; }
 
 	// Use this for initialization
 	public override void Start () 

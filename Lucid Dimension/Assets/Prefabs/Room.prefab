@@ -516,7 +516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1112921345110816, guid: 5e49ac2a5de4cdc4a8940de68e169fff,
     type: 2}
-  enemyCount: 3
+  enemyCount: 1
 --- !u!114 &114679219272640420
 MonoBehaviour:
   m_ObjectHideFlags: 1

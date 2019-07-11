@@ -11,7 +11,7 @@ public class RoomController : MonoBehaviour {
 
     public static RoomController rc;
 	// Use this for initialization
-	void Start ()
+	void Awake ()
     {
         rc = this;
 	}

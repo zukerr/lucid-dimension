@@ -14,7 +14,7 @@ public class RoomManagement : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-		
+        
 	}
 	
 	// Update is called once per frame
@@ -32,6 +32,20 @@ public class RoomManagement : MonoBehaviour
         enemyManagement.InitializeEnemies();
 
         RoomGenerator.me.currentEnemiesCount = enemyManagement.EnemyCount;
+    }
+
+    public void RandomizeDoors()
+    {
+        RandomDoor rd = new RandomDoor(this);
+        rd.SetupDoorBooleans();
+    }
+
+    public void SetupDoors()
+    {
+        ParentRoom.rightDoor.Setup();
+        ParentRoom.leftDoor.Setup();
+        ParentRoom.topDoor.Setup();
+        ParentRoom.bottomDoor.Setup();
     }
 
     public void CloseDoors()

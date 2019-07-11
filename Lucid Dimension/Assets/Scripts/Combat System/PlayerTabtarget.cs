@@ -28,8 +28,9 @@ public class PlayerTabtarget : MonoBehaviour {
 		if (col.GetComponent<Alive> () != null) 
 		{
 			nearbyEnemies.Add (col.GetComponent<Transform>());
-			Debug.Log ("Adding: " + col.name);
-			Debug.Log ("nearbyEnemies Count: " + nearbyEnemies.Count);
+            col.GetComponent<Opponent>().InRange = true;
+			//Debug.Log ("Adding: " + col.name);
+			//Debug.Log ("nearbyEnemies Count: " + nearbyEnemies.Count);
 			hadClosestTargetInCurrentState = false;
 		}
 	}
@@ -39,8 +40,9 @@ public class PlayerTabtarget : MonoBehaviour {
         if (col.GetComponent<Alive>() != null)
         {
             nearbyEnemies.Remove(col.GetComponent<Transform>());
-            Debug.Log("Removing: " + col.name);
-            Debug.Log("nearbyEnemies Count: " + nearbyEnemies.Count);
+            col.GetComponent<Opponent>().InRange = false;
+            //Debug.Log("Removing: " + col.name);
+            //Debug.Log("nearbyEnemies Count: " + nearbyEnemies.Count);
             hadClosestTargetInCurrentState = false;
         }
 	}
