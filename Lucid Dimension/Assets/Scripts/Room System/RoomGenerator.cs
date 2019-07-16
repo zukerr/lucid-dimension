@@ -13,19 +13,27 @@ public class RoomGenerator : MonoBehaviour {
     public static RoomGenerator me;
 
     private Room[,] roomTab;
+    private List<Room> roomList;
 
     public int currentEnemiesCount;
 
     public Room activeRoom;
     public bool startingRoomCreated = false;
 
+    public List<Room> RoomList
+    {
+        get { return roomList; }
+    }
+
 	// Use this for initialization
 	void Start ()
     {
         me = this;
+        roomList = new List<Room>();
         roomTab = new Room[1000, 1000];
-        roomTab[500, 500] = startingRoom;
-        startingRoom.SetRoomIndex(500, 500);
+        //roomTab[500, 500] = startingRoom;
+        //startingRoom.SetRoomIndex(500, 500);
+        AddNewRoom(500, 500, startingRoom);
         startingRoom.GenerateAdjacent();
         StartCoroutine(GameStart());
         activeRoom = startingRoom;
@@ -72,6 +80,7 @@ public class RoomGenerator : MonoBehaviour {
     {
         if(TargetRoomAvailible(x, y))
         {
+            roomList.Add(room);
             roomTab[x, y] = room;
             room.SetRoomIndex(x, y);
         }

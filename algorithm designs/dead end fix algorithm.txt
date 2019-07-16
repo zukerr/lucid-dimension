@@ -1,0 +1,12 @@
+Solution 1.
+
+Check whether or not there is a soft lock:
+
+-Iterate through every existing room
+-On every iteration check if the room has a door and there is no connected room to it
+	-if yes, then break the loop and return false[There is no dead end]
+-If the loop ended and we havent found such room, then generated map is soft locked [return true]
+
+--> summary: complexity O(n) worst case (where n is a number of rooms)
+
+

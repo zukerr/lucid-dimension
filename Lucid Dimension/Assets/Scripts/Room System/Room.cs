@@ -121,6 +121,7 @@ public class Room : MonoBehaviour
             RoomGenerator.me.AddNewRoom(xRoomIndex + 1, yRoomIndex, rightRoom.GetComponent<Room>());
             RandomizeDoorsGeneration(rightRoom);
             rightRoom.GetComponent<Room>().left = true;
+            new RoomFixer().DeadEndFix(rightRoom.GetComponent<Room>());
             rightRoom.GetComponent<Room>().Management.SetupDoors();
         }
         if ((left) && (leftRoom == null) && (RoomGenerator.me.TargetRoomAvailible(xRoomIndex - 1, yRoomIndex)))
@@ -130,6 +131,7 @@ public class Room : MonoBehaviour
             RoomGenerator.me.AddNewRoom(xRoomIndex - 1, yRoomIndex, leftRoom.GetComponent<Room>());
             RandomizeDoorsGeneration(leftRoom);
             leftRoom.GetComponent<Room>().right = true;
+            new RoomFixer().DeadEndFix(leftRoom.GetComponent<Room>());
             leftRoom.GetComponent<Room>().Management.SetupDoors();
         }
         if ((top) && (topRoom == null) && (RoomGenerator.me.TargetRoomAvailible(xRoomIndex, yRoomIndex + 1)))
@@ -139,6 +141,7 @@ public class Room : MonoBehaviour
             RoomGenerator.me.AddNewRoom(xRoomIndex, yRoomIndex + 1, topRoom.GetComponent<Room>());
             RandomizeDoorsGeneration(topRoom);
             topRoom.GetComponent<Room>().bottom = true;
+            new RoomFixer().DeadEndFix(topRoom.GetComponent<Room>());
             topRoom.GetComponent<Room>().Management.SetupDoors();
         }
         if ((bottom) && (bottomRoom == null) && (RoomGenerator.me.TargetRoomAvailible(xRoomIndex, yRoomIndex - 1)))
@@ -148,6 +151,7 @@ public class Room : MonoBehaviour
             RoomGenerator.me.AddNewRoom(xRoomIndex, yRoomIndex - 1, bottomRoom.GetComponent<Room>());
             RandomizeDoorsGeneration(bottomRoom);
             bottomRoom.GetComponent<Room>().top = true;
+            new RoomFixer().DeadEndFix(bottomRoom.GetComponent<Room>());
             bottomRoom.GetComponent<Room>().Management.SetupDoors();
         }
     }
@@ -157,6 +161,8 @@ public class Room : MonoBehaviour
         room.GetComponent<Room>().Management = room.GetComponent<RoomManagement>();
         room.GetComponent<Room>().Management.ParentRoom = room.GetComponent<Room>();
         room.GetComponent<Room>().Management.RandomizeDoors();
+        RoomFixer fixer = new RoomFixer();
+        fixer.DoorFix(room.GetComponent<Room>());
     }
 
     public Room GetAdjacentRoom(Direction dir)

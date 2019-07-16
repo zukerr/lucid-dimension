@@ -16522,11 +16522,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114591688333289158, guid: fa27466db51e4c7499a2d5ae711ab4d4,
-        type: 2}
-      propertyPath: enemyCount
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa27466db51e4c7499a2d5ae711ab4d4, type: 2}
   m_IsPrefabAsset: 0

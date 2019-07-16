@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Combustion : Card 
 {
-	private float damage = 4f;
+	private float damage = 20f;
 
 	public Combustion(Deck parentDeck) : base(parentDeck)
 	{

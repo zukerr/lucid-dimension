@@ -6,7 +6,11 @@ public class Opponent : Alive
 {
 
     private bool inRange = false;
-    public bool InRange { get; set; }
+    public bool InRange
+    {
+        get { return inRange; }
+        set { inRange = value; }
+    }
 
 	// Use this for initialization
 	public override void Start () 
